@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>구입 희망도서 신청 | 청수고등학교 도서관</title>
+<style>
+:root{
+  --green:#5dbb79;
+  --green-dark:#2f7d4c;
+  --green-deep:#1f5f39;
+  --lime:#eff9e8;
+  --lime2:#e4f5d9;
+  --mint:#f4fbf1;
+  --ink:#1f2b24;
+  --muted:#667269;
+  --line:#dbe8dc;
+  --card:#ffffff;
+  --shadow:0 16px 38px rgba(51,92,64,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 8%,rgba(125,194,103,.16),transparent 25%),
+    radial-gradient(circle at 90% 14%,rgba(93,187,121,.13),transparent 28%),
+    linear-gradient(180deg,#f9fcf7,#f4f9f2 60%,#fbfdf9);
+}
+.wrap{max-width:940px;margin:auto;padding:28px 18px 70px}
+.hero{text-align:center;padding:34px 12px 20px}
+.school{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid #d7e8d6;
+  color:var(--green-dark);
+  font-size:13px;
+  font-weight:800
+}
+.hero h1{
+  font-size:clamp(34px,7vw,50px);
+  letter-spacing:-2px;
+  margin:14px 0 8px;
+  color:#111;
+  font-weight:900
+}
+.hero p{margin:0;color:var(--muted);font-size:15px}
+.quick{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:18px 0 8px
+}
+.quick a{
+  text-decoration:none;
+  border-radius:18px;
+  padding:16px 18px;
+  font-weight:900;
+  text-align:center;
+  box-shadow:var(--shadow);
+  transition:.15s
+}
+.quick a:hover{transform:translateY(-2px)}
+.search-link{
+  background:var(--lime);
+  color:var(--green-deep);
+  border:1px solid #d0e8c7
+}
+.list-link{
+  background:#e9f7e8;
+  color:var(--green-dark);
+  border:1px solid #cfe6cf
+}
+.tip{
+  margin:12px 0 20px;
+  padding:13px 16px;
+  border-radius:14px;
+  background:#f5faeb;
+  color:#49623f;
+  font-size:13px;
+  line-height:1.55;
+  border:1px solid #dcebcf
+}
+.card{
+  background:rgba(255,255,255,.96);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:24px;
+  margin:16px 0;
+  box-shadow:var(--shadow)
+}
+.step{display:flex;align-items:center;gap:11px;margin-bottom:18px}
+.num{
+  width:32px;height:32px;border-radius:50%;
+  display:grid;place-items:center;
+  background:var(--lime2);
+  color:var(--green-dark);
+  font-weight:900
+}
+.step h2{font-size:19px;margin:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:800;margin:0 0 7px}
+input{
+  width:100%;
+  border:1px solid #d8e2d9;
+  border-radius:14px;
+  padding:13px 14px;
+  font:inherit;
+  background:#fff;
+  outline:none
+}
+input:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px #e7f5e3
+}
+.type{display:flex;gap:10px}
+.type label{flex:1;margin:0}
+.type input{display:none}
+.type span{
+  display:block;
+  text-align:center;
+  padding:14px;
+  border:1px solid #d8e2d9;
+  border-radius:14px;
+  cursor:pointer;
+  background:#fff
+}
+.type input:checked+span{
+  background:var(--lime);
+  border-color:var(--green);
+  color:var(--green-deep);
+  font-weight:900
+}
+.book{
+  background:linear-gradient(180deg,#fbfef9,#fff);
+  border:1px solid #dbead7;
+  border-radius:20px;
+  padding:18px;
+  margin:12px 0
+}
+.bookhead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:13px
+}
+.booktitle{font-weight:900;color:#2f6845}
+.remove{
+  border:0;
+  background:#f2f6ef;
+  color:#67806b;
+  border-radius:10px;
+  padding:7px 10px;
+  font-weight:800;
+  cursor:pointer
+}
+.bookgrid{display:grid;grid-template-columns:1.25fr 1fr 1fr .7fr;gap:10px}
+.add{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1px dashed #8fc696;
+  color:var(--green-dark);
+  background:#f6fbf3;
+  font-weight:900;
+  cursor:pointer;
+  margin-top:10px
+}
+.add:disabled{opacity:.5;cursor:default}
+.counter{text-align:right;color:#7d887f;font-size:12px;margin-top:8px}
+.notice{
+  margin-top:12px;
+  background:#f2f8ef;
+  color:#617064;
+  border-radius:13px;
+  padding:13px 15px;
+  font-size:12.5px;
+  line-height:1.6
+}
+.submit{
+  width:100%;
+  border:0;
+  border-radius:17px;
+  padding:17px;
+  background:#B8D8B8;
+  color:#31563A;
+  font-size:17px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 9px 22px rgba(77,169,107,.22)
+}
+.submit:disabled{opacity:.55;cursor:default}
+.progress{display:none;text-align:center;color:#637067;font-size:13px;margin-top:12px}
+.done{display:none;text-align:center;padding:24px 10px}
+.done .icon{font-size:52px}
+.done h2{margin-bottom:8px}
+.tiny{text-align:center;color:#8e9a90;font-size:12px;margin-top:20px}
+@media(max-width:760px){
+  .quick,.grid,.bookgrid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .card{padding:18px;border-radius:20px}
+  .wrap{padding:16px 12px 50px}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="hero">
+  <span class="school">🌿 청수고등학교 도서관</span>
+  <h1>구입 희망도서 신청</h1>
+  <p>읽고 싶은 책, 우리학교 도서관에서 함께 읽어요. 📚</p>
+</header>
+
+<div class="quick">
+  <a class="search-link" href="https://read365.edunet.net/PureScreen/SchoolSearch?searchType=&provCode=N10&neisCode=N100002547&schoolName=%EC%B2%9C%EC%95%88%EC%B2%AD%EC%88%98%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90" target="_blank" rel="noopener">🔍 우리학교 도서 검색</a>
+  <a class="list-link" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRkmsPctzyO-w3MgmzrjShcysoxyQZgPFrH-eNGyT3zu9QMasKOaTEfotc5neZkhtyPn4qno1WmxWBE/pubhtml?gid=278861224&single=true" target="_blank" rel="noopener">📋 희망도서 신청목록 보기</a>
+</div>
+
+<div class="tip">
+  신청 전 <b>우리학교 도서관에 이미 소장된 책인지</b> 먼저 확인해 주세요.
+  이미 소장 중인 도서는 구입 대상에서 제외될 수 있습니다.
+</div>
+
+<form id="mainForm">
+<section class="card">
+  <div class="step"><div class="num">1</div><h2>신청자 정보</h2></div>
+  <div class="grid">
+    <div class="full">
+      <label>성함 *</label>
+      <input id="name" required placeholder="이름을 입력해주세요">
+    </div>
+    <div class="full">
+      <label>신청자 구분 *</label>
+      <div class="type">
+        <label><input type="radio" name="kind" value="학생" checked><span>🎒 학생</span></label>
+        <label><input type="radio" name="kind" value="교직원"><span>🧑‍🏫 교직원</span></label>
+      </div>
+    </div>
+    <div class="full" id="studentBox">
+      <label>학번 *</label>
+      <input id="studentNo" placeholder="예) 10101" inputmode="numeric" required>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="step"><div class="num">2</div><h2>희망도서 입력</h2></div>
+  <div id="books"></div>
+  <button type="button" class="add" id="addBook">＋ 도서 한 권 더 추가하기</button>
+  <div class="counter" id="counter">1 / 10권</div>
+  <div class="notice">
+    한 번에 <b>최대 10권</b>까지 신청할 수 있어요.
+    각 도서는 <b>도서명·저자명</b>을 필수로 입력하고, 출판사명·정가는 선택 입력입니다.
+  </div>
+</section>
+
+<section class="card">
+  <button class="submit" id="submitBtn">📚 희망도서 신청하기</button>
+  <div class="progress" id="progress">신청 내용을 전송하고 있어요…</div>
+  <div class="done" id="done">
+    <div class="icon">📚🌿</div>
+    <h2>신청이 완료되었습니다!</h2>
+    <p>신청한 도서는 도서 선정 기준과 예산을 고려하여 검토합니다.</p>
+  </div>
+</section>
+</form>
+
+<div class="tiny">천안청수고등학교 · 학교도서관</div>
+</main>
+
+<iframe name="formSink" hidden></iframe>
+
+<script>
+const MAX_BOOKS = 10;
+const ENDPOINT = 'https://docs.google.com/forms/d/e/1FAIpQLSdwUBa_vLE8jAtdpA9h7rYTu8wBWSnstilxnAmlbqft5E55DQ/formResponse';
+const ENTRY = {
+  name:'806878537',
+  kind:'1943031859',
+  studentNo:'1224051363',
+  title:'508876629',
+  author:'1099434113',
+  publisher:'1980958454',
+  price:'2110938534'
+};
+
+const booksEl = document.getElementById('books');
+const addBtn = document.getElementById('addBook');
+const counter = document.getElementById('counter');
+const studentBox = document.getElementById('studentBox');
+const studentNo = document.getElementById('studentNo');
+const submitBtn = document.getElementById('submitBtn');
+const progress = document.getElementById('progress');
+const done = document.getElementById('done');
+
+function renumber(){
+  [...document.querySelectorAll('.book')].forEach((b,i)=>{
+    b.querySelector('.booktitle').textContent = '📖 ' + (i+1) + '번째 도서' + (i===0?' *':'');
+  });
+  const n = document.querySelectorAll('.book').length;
+  counter.textContent = n + ' / ' + MAX_BOOKS + '권';
+  addBtn.disabled = n >= MAX_BOOKS;
+  addBtn.textContent = n >= MAX_BOOKS ? '최대 10권까지 신청할 수 있어요' : '＋ 도서 한 권 더 추가하기';
+}
+
+function addBook(){
+  if(document.querySelectorAll('.book').length >= MAX_BOOKS) return;
+  const d = document.createElement('div');
+  d.className = 'book';
+  d.innerHTML = `
+    <div class="bookhead">
+      <div class="booktitle"></div>
+      ${booksEl.children.length ? '<button type="button" class="remove">삭제</button>' : ''}
+    </div>
+    <div class="bookgrid">
+      <div><label>도서명 *</label><input class="title" required placeholder="도서명"></div>
+      <div><label>저자명 *</label><input class="author" required placeholder="저자명"></div>
+      <div><label>출판사명</label><input class="publisher" placeholder="출판사명"></div>
+      <div><label>정가</label><input class="price" inputmode="numeric" placeholder="예) 18000"></div>
+    </div>`;
+  d.querySelector('.remove')?.addEventListener('click',()=>{ d.remove(); renumber(); });
+  booksEl.appendChild(d);
+  renumber();
+}
+
+addBook();
+addBtn.addEventListener('click', addBook);
+
+document.querySelectorAll('input[name=kind]').forEach(r=>{
+  r.addEventListener('change',()=>{
+    const isStudent = document.querySelector('input[name=kind]:checked').value === '학생';
+    studentBox.style.display = isStudent ? 'block' : 'none';
+    studentNo.required = isStudent;
+    if(!isStudent) studentNo.value = '';
+  });
+});
+
+function hidden(form, key, value){
+  const i = document.createElement('input');
+  i.type = 'hidden';
+  i.name = 'entry.' + key;
+  i.value = value || '';
+  form.appendChild(i);
+}
+
+function submitOne(book, user, index){
+  return new Promise(resolve=>{
+    const f = document.createElement('form');
+    f.method = 'POST';
+    f.action = ENDPOINT;
+    f.target = 'formSink';
+    f.style.display = 'none';
+    hidden(f, ENTRY.name, user.name);
+    hidden(f, ENTRY.kind, user.kind);
+    hidden(f, ENTRY.studentNo, user.studentNo);
+    hidden(f, ENTRY.title, book.title);
+    hidden(f, ENTRY.author, book.author);
+    hidden(f, ENTRY.publisher, book.publisher);
+    hidden(f, ENTRY.price, book.price);
+    document.body.appendChild(f);
+    f.submit();
+    setTimeout(()=>{ f.remove(); resolve(); }, 650 + index*120);
+  });
+}
+
+document.getElementById('mainForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(!e.target.reportValidity()) return;
+
+  const user = {
+    name: document.getElementById('name').value.trim(),
+    kind: document.querySelector('input[name=kind]:checked').value,
+    studentNo: studentNo.value.trim()
+  };
+  const books = [...document.querySelectorAll('.book')].map(b=>({
+    title:b.querySelector('.title').value.trim(),
+    author:b.querySelector('.author').value.trim(),
+    publisher:b.querySelector('.publisher').value.trim(),
+    price:b.querySelector('.price').value.trim()
+  }));
+
+  submitBtn.disabled = true;
+  progress.style.display = 'block';
+
+  for(let i=0;i<books.length;i++){
+    await submitOne(books[i], user, i);
+  }
+
+  progress.style.display = 'none';
+  submitBtn.style.display = 'none';
+  done.style.display = 'block';
+  window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
+});
+</script>
+</body>
+</html>
